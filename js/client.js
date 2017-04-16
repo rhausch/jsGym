@@ -60,10 +60,12 @@
             var _lastInfo = '';
 
             testbed._status = function(statusText, statusMap) {
+                var value;
                 var newline = '\n';
                 var string = statusText || '';
                 for (var key in statusMap) {
-                    var value = statusMap[key];
+                    //noinspection JSUnfilteredForInLoop
+                    value = statusMap[key];
                     if (typeof value === 'function') continue;
                     string += (string && newline) + key + ': ' + value;
                 }

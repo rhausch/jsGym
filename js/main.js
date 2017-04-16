@@ -40,7 +40,7 @@ Car.prototype.__constuctor = function (car_genome) {
             localAnchorB: Vec2(0.0, 0.0),
             motorSpeed: -10.0,
             maxMotorTorque: 1000.0,
-            enableMotor: true,
+            enableMotor: true
         }, this.chassis, this.wheels[i]));
         this.joints.push(joint);
     }
@@ -53,9 +53,11 @@ Car.prototype.kill = function () {
     if (this.alive == false) {
         return;
     }
+    //noinspection JSDuplicatedDeclaration
     for (var i = 0; i < this.wheels.length; i++) {
         world.destroyBody(this.wheels[i]);
     }
+    //noinspection JSDuplicatedDeclaration
     for (var i = 0; i < this.joints.length; i++) {
         world.destroyJoint(this.joints[i]);
     }
@@ -114,9 +116,6 @@ function processGenome (genome) {
 function geneToFloat(gene) {
     return (gene)/10.0;
 }
-
-var bodies = [];
-var joints = [];
 
 function Car_createChassis(vectors) {
     var center = Vec2(-10.0, 10.0);
@@ -222,7 +221,7 @@ Cars.prototype.getScores = function () {
         scores[i] = this.cars[i].maxPosition;
     }
     return scores;
-}
+};
 
 /****************************************************
  * Genome functions                                 *
@@ -254,7 +253,9 @@ GenePool.prototype.__constuctor = function (size) {
 };
 
 GenePool.prototype.evolve = function (scores) {
+    var randGene;
     var bestIndex = 0;
+    //noinspection JSDuplicatedDeclaration
     for (var i = 1; i < scores.length; i++) {
         if (scores[i] > scores[bestIndex]) {
             bestIndex = i;
@@ -265,10 +266,11 @@ GenePool.prototype.evolve = function (scores) {
 
     this.genes[0] = bestGene.slice();
 
+    //noinspection JSDuplicatedDeclaration
     for (var i = 1; i < this.size; i++) { //index 0 holds unmodified version
         this.genes[i] = bestGene.slice();
         var randIndex = Math.floor(Math.random() * NUM_GENES);
-        var randGene = Math.floor(Math.random() * 100);
+        randGene = Math.floor(Math.random() * 100);
         this.genes[i][randIndex] = randGene;
     }
 };
@@ -290,7 +292,7 @@ var Ground = function () {
     this.__constuctor.apply(this, arguments);
 };
 
-Ground.prototype.ground;
+Ground.prototype.ground = null;
 Ground.prototype.heightMap = [];
 Ground.prototype.sectionSize = 5;
 
@@ -308,7 +310,7 @@ Ground.prototype.__constuctor = function (heightmap) {
     for (var i = 0; i < this.heightMap.length - 1; i++) {
         this.ground.createFixture(pl.Edge(Vec2(i*this.sectionSize,this.heightMap[i]), Vec2((i+1)*this.sectionSize,this.heightMap[i+1])), {friction: 0.9});
     }
-}
+};
 
 function generateHeightMap(size) {
     var prev = 0;
@@ -340,10 +342,7 @@ function printStats (scores) {
     console.log(bestIndex, "did best with a scores of ", scores[bestIndex], ". The average score was: ", sum/scores.length);
 }
 
-var heightMap = [0,0,0,0,0,5,5,0,10,10,15,3,0,15,0,5,20,10,5,0,10,30,50,40,0,10,0,500];
-
-var maxX = -100;
-var staleTurns = 0;
+//var heightMap = [0,0,0,0,0,5,5,0,10,10,15,3,0,15,0,5,20,10,5,0,10,30,50,40,0,10,0,500];
 
 planck.testbed(function (testbed) {
     testbed.speed = 1.4;
@@ -388,7 +387,7 @@ planck.testbed(function (testbed) {
             testbed.x = cp;
         }
 
-    }
+    };
 
     return world;
-})
+});

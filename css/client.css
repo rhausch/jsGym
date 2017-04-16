@@ -139,8 +139,8 @@ select {
     max-width: 100%;
   }
   select, button {
-    border: 0px solid #666;
-    border-radius: 0px;
+    border: 1px solid #666;
+    border-radius: 1px;
     background: #333;
     color: #fff;
   }
