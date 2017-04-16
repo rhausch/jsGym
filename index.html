@@ -2,14 +2,39 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="css/client.css" />
     <title>Title</title>
 </head>
 <body>
 
-
+<div class="center">
+    <div class="header">
+        <table class="control">
+            <tr><td>
+                <a id="playbtn" class="pause"><span class="pause">Pause</span><span class="play">Play</span></a>
+            </td><td>
+                <a id="reloadbtn">Reload</a>
+            </td><td>
+                <a id="prevbtn">Prev</a>
+            </td><td>
+                <a id="nextbtn">Next</a>
+            </td><td>
+                <select id="dropdown">
+                    <option selected disabled hidden value=''>Select...</option>
+                    {{#examples}}<option value="{{url}}" {{#selected}}selected{{/selected}}>{{name}}</option>{{/examples}}
+                </select>
+            </td></tr>
+        </table>
+        <h3 class="title">Cars Genetic Algorithm Evolution</h3>
+    </div>
+    <canvas id="stage"></canvas>
+    <div id="status"></div>
+    <div id="info"></div>
+</div>
 
 <script src="https://cdn.jsdelivr.net/planck/0.1/planck-with-testbed.js"></script>
 <script src="js/main.js"></script>
+<script src="js/client.js"></script>
 
 </body>
 </html>
