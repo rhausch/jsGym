@@ -329,6 +329,8 @@ function generateHeightMap(size) {
  * World functions                                 *
  ****************************************************/
 
+var generation = 0;
+
 function printStats (scores) {
     var bestIndex = 0;
     var sum = 0;
@@ -339,7 +341,13 @@ function printStats (scores) {
             bestIndex = i;
     }
 
-    console.log(bestIndex, "did best with a scores of ", scores[bestIndex], ". The average score was: ", sum/scores.length);
+    generation += 1;
+
+    var stats = "Generation " + generation + ": #" + bestIndex + " did best with a scores of " + scores[bestIndex] + ". The average score was: " + (sum/scores.length) + ".";
+
+    $('#scores').prepend('<li>'+stats+'</li>');
+
+    console.log(stats);
 }
 
 //var heightMap = [0,0,0,0,0,5,5,0,10,10,15,3,0,15,0,5,20,10,5,0,10,30,50,40,0,10,0,500];
